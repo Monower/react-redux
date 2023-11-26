@@ -10,15 +10,25 @@ export const counterSlice = createSlice({
         increment: (state) => {
             state.value = state.value + 1
         },
-        decrement: (state)=>{
+        decrement: (state) => {
             state.value = state.value - 1
         },
         incrementByAmount: (state, action) => {
-            state.value += action.payload
-            console.log(state.value);
+            if (state.value >= 50) {
+                alert('limit reached.')
+            } else {
+                state.value += action.payload
+                console.log(state.value);
+            }
+
         },
-        decrementByAmount: (state,action) => {
-            state.value = state.value - action.payload
+        decrementByAmount: (state, action) => {
+            if (state.value <= 0) {
+                alert('limit reached.')
+            } else {
+                state.value = state.value - action.payload
+            }
+
         },
         reset: (state) => {
             state.value = 0
@@ -28,6 +38,6 @@ export const counterSlice = createSlice({
 })
 
 
-export const{ increment,decrement,incrementByAmount,reset,decrementByAmount } = counterSlice.actions;
+export const { increment, decrement, incrementByAmount, reset, decrementByAmount } = counterSlice.actions;
 
 export default counterSlice.reducer;
